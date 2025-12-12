@@ -19,7 +19,7 @@ export const getSwipeDirection = (
 
   const { time, boundaries, position, translate } = options;
 
-  const deltaTime = performance.now() - time;
+  const deltaTime = (globalThis as any).performance.now() - time;
   const { x: boundX, y: boundY } = boundaries;
 
   const swipedDistanceX = Math.abs(position.x - e.absoluteX) >= SWIPE_DISTANCE;

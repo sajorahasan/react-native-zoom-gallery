@@ -1,4 +1,3 @@
-/* eslint-disable simple-import-sort/imports */
 import React, { useContext, useImperativeHandle, useState } from 'react';
 
 import Animated, {
@@ -133,13 +132,14 @@ const Gallery = <T,>(props: GalleryPropsWithRef<T>) => {
 
   useAnimatedReaction(
     () => ({ scroll: scroll.value, itemSize: itemSize.value }),
-    (value) => onScroll?.(value.scroll, (data.length - 1) * value.itemSize),
+    (value: { scroll: number; itemSize: number }) =>
+      onScroll?.(value.scroll, (data.length - 1) * value.itemSize),
     [scroll, itemSize]
   );
 
   useAnimatedReaction(
     () => activeIndex.value,
-    (value) => {
+    (value: number) => {
       onIndexChange && runOnJS(onIndexChange)(value);
       runOnJS(setScrollIndex)(value);
     },
@@ -151,7 +151,7 @@ const Gallery = <T,>(props: GalleryPropsWithRef<T>) => {
       vertical,
       size: { width: rootSize.width.value, height: rootSize.height.value },
     }),
-    (value) => {
+    (value: { vertical: boolean; size: { width: number; height: number } }) => {
       scroll.value = getScrollPosition({
         index: activeIndex.value,
         itemSize: value.vertical ? value.size.height : value.size.width,
@@ -163,7 +163,7 @@ const Gallery = <T,>(props: GalleryPropsWithRef<T>) => {
 
   useAnimatedReaction(
     () => scale.value,
-    (value, previousValue) => {
+    (value: number, previousValue: number | null) => {
       if (value !== 1 && !hasZoomed.value) {
         hasZoomed.value = true;
         onZoomBegin && runOnJS(onZoomBegin)(activeIndex.value);

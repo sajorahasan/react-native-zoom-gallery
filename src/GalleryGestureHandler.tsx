@@ -161,7 +161,7 @@ const GalleryGestureHandler = ({
     const velocity = vertical ? e.velocityY : e.velocityX;
     const toScroll = snapPoint(scroll.value, velocity, [prev, current, next]);
 
-    scroll.value = withTiming(toScroll, config, (finished) => {
+    scroll.value = withTiming(toScroll, config, (finished?: boolean) => {
       if (!finished) return;
       if (toScroll !== current) {
         activeIndex.value += toScroll === next ? 1 : -1;
@@ -192,13 +192,17 @@ const GalleryGestureHandler = ({
       gap,
     });
 
-    scroll.value = withTiming(newScrollPosition, config, (finished) => {
-      if (!finished) return;
+    scroll.value = withTiming(
+      newScrollPosition,
+      config,
+      (finished?: boolean) => {
+        if (!finished) return;
 
-      activeIndex.value = toIndex;
-      isScrolling.value = false;
-      reset(0, 0, minScale, false);
-    });
+        activeIndex.value = toIndex;
+        isScrolling.value = false;
+        reset(0, 0, minScale, false);
+      }
+    );
   };
 
   useAnimatedReaction(
@@ -207,7 +211,7 @@ const GalleryGestureHandler = ({
       isPulling: isPullingVertical.value,
       released: pullReleased.value,
     }),
-    (val) => {
+    (val: { translate: number; isPulling: boolean; released: boolean }) => {
       val.isPulling && onVerticalPull?.(val.translate, val.released);
     },
     [translate, isPullingVertical, pullReleased]
@@ -301,7 +305,7 @@ const GalleryGestureHandler = ({
       isPullingVertical.value = isVerticalPan && scale.value === 1 && !vertical;
       isScrolling.value = true;
 
-      time.value = performance.now();
+      time.value = (globalThis as any).performance.now();
       position.x.value = e.absoluteX;
       position.y.value = e.absoluteY;
 
@@ -360,7 +364,7 @@ const GalleryGestureHandler = ({
 
       if (isPullingVertical.value) {
         pullReleased.value = true;
-        translate.y.value = withTiming(0, undefined, (finished) => {
+        translate.y.value = withTiming(0, undefined, (finished?: boolean) => {
           isPullingVertical.value = !finished;
           pullReleased.value = !finished;
         });

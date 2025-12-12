@@ -75,7 +75,7 @@ export const usePanCommons = (options: PanCommmonOptions) => {
     offset.x.value = translate.x.value;
     offset.y.value = translate.y.value;
 
-    time.value = performance.now();
+    time.value = (globalThis as any).performance.now();
     position.x.value = e.absoluteX;
     position.y.value = e.absoluteY;
   };
@@ -168,14 +168,18 @@ export const usePanCommons = (options: PanCommmonOptions) => {
 
     if (decayX || decayY) {
       const config = restX > restY ? decayConfigX : decayConfigY;
-      gestureEnd.value = withDecay(config, (finished) => {
+      gestureEnd.value = withDecay(config, (finished?: boolean) => {
         finished && onGestureEnd && runOnJS(onGestureEnd)();
       });
     } else {
       const toValue = restX > restY ? toX : toY;
-      gestureEnd.value = withTiming(toValue, undefined, (finished) => {
-        finished && onGestureEnd && runOnJS(onGestureEnd)();
-      });
+      gestureEnd.value = withTiming(
+        toValue,
+        undefined,
+        (finished?: boolean) => {
+          finished && onGestureEnd && runOnJS(onGestureEnd)();
+        }
+      );
     }
   };
 

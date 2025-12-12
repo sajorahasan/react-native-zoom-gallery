@@ -61,7 +61,7 @@ export const useDoubleTapCommons = ({
     translate.x.value = withTiming(toX);
     translate.y.value = withTiming(toY);
     scaleOffset.value = toScale;
-    scale.value = withTiming(toScale, undefined, (finished) => {
+    scale.value = withTiming(toScale, undefined, (finished?: boolean) => {
       runOnJS(setIsPanGestureEnabled)(true);
       finished && onGestureEnd && runOnJS(onGestureEnd)();
     });

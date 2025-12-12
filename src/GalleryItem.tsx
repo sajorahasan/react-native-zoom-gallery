@@ -116,7 +116,11 @@ const GalleryItem = ({
       translate: { x: translate.x.value, y: translate.y.value },
       scale: scale.value,
     }),
-    (current) => {
+    (current: {
+      activeIndex: number;
+      translate: { x: number; y: number };
+      scale: number;
+    }) => {
       if (index !== current.activeIndex) return;
       innerTranslate.x.value = current.translate.x;
       innerTranslate.y.value = current.translate.y;
@@ -127,7 +131,7 @@ const GalleryItem = ({
 
   useAnimatedReaction(
     () => activeIndex.value,
-    (value) => {
+    (value: number) => {
       if (index === value) {
         rootChildSize.width.value = innerSize.width.value;
         rootChildSize.height.value = innerSize.height.value;

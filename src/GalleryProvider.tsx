@@ -1,4 +1,3 @@
-/* eslint-disable simple-import-sort/imports */
 import { useMemo } from 'react';
 import { useSharedValue } from 'react-native-reanimated';
 
