@@ -17,4 +17,6 @@ export type GalleryContextType = {
   hideAdjacentItems: SharedValue<boolean>;
 };
 
-export const GalleryContext = React.createContext<GalleryContextType>({} as GalleryContextType);
+export const GalleryContext = React.createContext<GalleryContextType>(
+  {} as GalleryContextType
+);

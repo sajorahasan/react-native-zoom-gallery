@@ -26,22 +26,26 @@ export const getSwipeDirection = (
   const swipedDistanceY = Math.abs(position.y - e.absoluteY) >= SWIPE_DISTANCE;
   const swipedInTime = deltaTime <= SWIPE_TIME;
 
-  const swipeRight = e.velocityX >= SWIPE_VELOCITY && swipedDistanceX && swipedInTime;
+  const swipeRight =
+    e.velocityX >= SWIPE_VELOCITY && swipedDistanceX && swipedInTime;
 
   const inRightBound = translate.x === boundX;
   if (swipeRight && inRightBound) return 'right';
 
-  const swipeLeft = e.velocityX <= -1 * SWIPE_VELOCITY && swipedDistanceX && swipedInTime;
+  const swipeLeft =
+    e.velocityX <= -1 * SWIPE_VELOCITY && swipedDistanceX && swipedInTime;
 
   const inLeftBound = translate.x === -1 * boundX;
   if (swipeLeft && inLeftBound) return 'left';
 
-  const swipeUp = e.velocityY <= -1 * SWIPE_VELOCITY && swipedDistanceY && swipedInTime;
+  const swipeUp =
+    e.velocityY <= -1 * SWIPE_VELOCITY && swipedDistanceY && swipedInTime;
 
   const inUpperBound = translate.y === -1 * boundY;
   if (swipeUp && inUpperBound) return 'up';
 
-  const swipeDown = e.velocityY >= SWIPE_VELOCITY && swipedDistanceY && swipedInTime;
+  const swipeDown =
+    e.velocityY >= SWIPE_VELOCITY && swipedDistanceY && swipedInTime;
 
   const inLowerBound = translate.y === boundY;
   if (swipeDown && inLowerBound) return 'down';

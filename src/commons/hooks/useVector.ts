@@ -2,7 +2,10 @@ import { type SharedValue, useSharedValue } from 'react-native-reanimated';
 
 import type { Vector } from '../types';
 
-export const useVector = (x: number, y: number): Vector<SharedValue<number>> => {
+export const useVector = (
+  x: number,
+  y: number
+): Vector<SharedValue<number>> => {
   const first = useSharedValue<number>(x);
   const second = useSharedValue<number>(y);
 

@@ -49,13 +49,17 @@ export type CommonResumableProps = Partial<{
   onGestureEnd: () => void;
 }>;
 
-export type TapGestureEvent = GestureStateChangeEvent<TapGestureHandlerEventPayload>;
+export type TapGestureEvent =
+  GestureStateChangeEvent<TapGestureHandlerEventPayload>;
 
-export type PinchGestureEvent = GestureStateChangeEvent<PinchGestureHandlerEventPayload>;
+export type PinchGestureEvent =
+  GestureStateChangeEvent<PinchGestureHandlerEventPayload>;
 
-export type PanGestureEvent = GestureStateChangeEvent<PanGestureHandlerEventPayload>;
+export type PanGestureEvent =
+  GestureStateChangeEvent<PanGestureHandlerEventPayload>;
 
-export type LongPressEvent = GestureStateChangeEvent<LongPressGestureHandlerEventPayload>;
+export type LongPressEvent =
+  GestureStateChangeEvent<LongPressGestureHandlerEventPayload>;
 
 export type PanGestureEventCallback = (e: PanGestureEvent) => void;
 export type TapGestureEventCallback = (e: TapGestureEvent) => void;

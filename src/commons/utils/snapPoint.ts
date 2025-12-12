@@ -1,4 +1,8 @@
-export const snapPoint = (value: number, velocity: number, points: readonly number[]): number => {
+export const snapPoint = (
+  value: number,
+  velocity: number,
+  points: readonly number[]
+): number => {
   'worklet';
   const point = value + 0.05 * velocity;
   const deltas = points.map((p) => Math.abs(point - p));

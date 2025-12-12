@@ -13,7 +13,15 @@ type CanvasToSizeOptions = {
 
 export const crop = (options: CanvasToSizeOptions) => {
   'worklet';
-  const { cropSize, itemSize, resolution, translation, scale, isRotated, fixedWidth } = options;
+  const {
+    cropSize,
+    itemSize,
+    resolution,
+    translation,
+    scale,
+    isRotated,
+    fixedWidth,
+  } = options;
 
   const rect = getVisibleRect({
     scale,

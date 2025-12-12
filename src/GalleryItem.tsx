@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { type LayoutChangeEvent } from 'react-native';
+
 import Animated, {
   useAnimatedReaction,
   useAnimatedStyle,
@@ -17,7 +17,7 @@ type GalleryItemProps = {
   gap: number;
   zIndex: number;
   vertical: boolean;
-  renderItem: (item: any, index: number) => React.ReactElement;
+  renderItem: (item: any, index: number) => React.ReactNode;
   customTransition?: GalleryTransitionCallback;
 };
 
@@ -45,8 +45,7 @@ const GalleryItem = ({
   const innerSize = useSizeVector(0, 0);
   const innerTranslate = useVector(0, 0);
   const innerScale = useSharedValue<number>(1);
-
-  const measureChild = (e: LayoutChangeEvent) => {
+  const measureChild = (e: any) => {
     innerSize.width.value = e.nativeEvent.layout.width;
     innerSize.height.value = e.nativeEvent.layout.height;
 
@@ -98,7 +97,8 @@ const GalleryItem = ({
 
     const currentScroll = -1 * scroll.value + index * gap;
 
-    const isSizeNotDefined = rootSize.width.value === 0 && rootSize.height.value === 0;
+    const isSizeNotDefined =
+      rootSize.width.value === 0 && rootSize.height.value === 0;
     const opacity = isSizeNotDefined && index !== activeIndex.value ? 0 : 1;
 
     if (vertical) {
@@ -144,9 +144,10 @@ const GalleryItem = ({
     <Animated.View
       testID={`child-${index}`}
       // @ts-ignore
-      style={[animatedRootStyles, transitionStyle, { zIndex }]}>
+      style={[animatedRootStyles, transitionStyle, { zIndex }]}
+    >
       <Animated.View style={childStyle} onLayout={measureChild}>
-        {renderItem(item, index)}
+        {renderItem(item, index) as any}
       </Animated.View>
     </Animated.View>
   );

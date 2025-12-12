@@ -47,7 +47,15 @@ type PanGestureUpdadeEvent = GestureUpdateEvent<
 >;
 
 export const usePanCommons = (options: PanCommmonOptions) => {
-  const { container, translate, offset, panMode, decay, boundFn, userCallbacks } = options;
+  const {
+    container,
+    translate,
+    offset,
+    panMode,
+    decay,
+    boundFn,
+    userCallbacks,
+  } = options;
 
   const { onSwipe, onGestureEnd, onOverPanning } = userCallbacks;
 
@@ -99,7 +107,8 @@ export const usePanCommons = (options: PanCommmonOptions) => {
       return;
     }
 
-    const overScrollFraction = Math.max(container.width.value, container.height.value) * 1.5;
+    const overScrollFraction =
+      Math.max(container.width.value, container.height.value) * 1.5;
 
     if (isWithinBoundX.value) {
       translate.x.value = toX;

@@ -120,7 +120,12 @@ const GalleryGestureHandler = ({
     return { x: boundX, y: boundY };
   };
 
-  const reset = (toX: number, toY: number, toScale: number, animate: boolean = true) => {
+  const reset = (
+    toX: number,
+    toY: number,
+    toScale: number,
+    animate: boolean = true
+  ) => {
     'worklet';
     cancelAnimation(translate.x);
     cancelAnimation(translate.y);
@@ -250,16 +255,17 @@ const GalleryGestureHandler = ({
     },
   });
 
-  const { onDoubleTapStart, onDoubleTapEnd, enablePanGestureByDoubleTap } = useDoubleTapCommons({
-    container: rootSize,
-    translate,
-    scale,
-    minScale,
-    maxScale,
-    scaleOffset,
-    boundsFn,
-    onGestureEnd,
-  });
+  const { onDoubleTapStart, onDoubleTapEnd, enablePanGestureByDoubleTap } =
+    useDoubleTapCommons({
+      container: rootSize,
+      translate,
+      scale,
+      minScale,
+      maxScale,
+      scaleOffset,
+      boundsFn,
+      onGestureEnd,
+    });
 
   const pinch = Gesture.Pinch()
     .withTestId('pinch')
@@ -338,9 +344,11 @@ const GalleryGestureHandler = ({
         },
       });
 
-      const canSwipeHorizontal = !vertical && (direction === 'left' || direction === 'right');
+      const canSwipeHorizontal =
+        !vertical && (direction === 'left' || direction === 'right');
 
-      const canSwipeVertical = vertical && (direction === 'up' || direction === 'down');
+      const canSwipeVertical =
+        vertical && (direction === 'up' || direction === 'down');
 
       if (canSwipeHorizontal || canSwipeVertical) {
         onSwipe(direction);

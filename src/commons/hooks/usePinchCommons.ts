@@ -45,7 +45,8 @@ type PinchOptions = {
   }>;
 };
 
-type PinchGestueUpdateEvent = GestureUpdateEvent<PinchGestureHandlerEventPayload>;
+type PinchGestueUpdateEvent =
+  GestureUpdateEvent<PinchGestureHandlerEventPayload>;
 
 export const usePinchCommons = (options: PinchOptions) => {
   const {

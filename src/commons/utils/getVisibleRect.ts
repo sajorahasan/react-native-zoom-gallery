@@ -23,9 +23,13 @@ export const getVisibleRect = (options: Options): Rect => {
   const x = itemSize.width * reducerX;
   const y = itemSize.height * reducerY;
 
-  const width = itemSize.width * Math.min(1, containerSize.width / (itemSize.width * scale));
+  const width =
+    itemSize.width *
+    Math.min(1, containerSize.width / (itemSize.width * scale));
 
-  const height = itemSize.height * Math.min(1, containerSize.height / (itemSize.height * scale));
+  const height =
+    itemSize.height *
+    Math.min(1, containerSize.height / (itemSize.height * scale));
 
   return { x, y, width, height };
 };

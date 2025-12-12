@@ -17,56 +17,44 @@ concurrency:
 jobs:
   lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - name: Setup
-        uses: ./.github/actions/setup
-
+        uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install
       - name: Lint files
-        run: yarn lint
-
+        run: bun run lint
       - name: Typecheck files
-        run: yarn typecheck
+        run: bun run typecheck
 
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - name: Setup
-        uses: ./.github/actions/setup
-
+        uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install
       - name: Run unit tests
-        run: yarn test --maxWorkers=2 --coverage
+        run: bun run test --maxWorkers=2 --coverage
 
   build-library:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - name: Setup
-        uses: ./.github/actions/setup
-
+        uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install
       - name: Build package
-        run: yarn prepare
-
-  build-web:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - name: Setup
-        uses: ./.github/actions/setup
-
-      - name: Build example for Web
-        run: |
-          yarn example expo export --platform web
+        run: bun run prepare

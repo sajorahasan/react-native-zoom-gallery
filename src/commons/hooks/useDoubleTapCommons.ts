@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { runOnJS, type SharedValue, withTiming } from 'react-native-reanimated';
 
-import type { BoundsFuction, SizeVector, TapGestureEvent, Vector } from '../types';
+import type {
+  BoundsFuction,
+  SizeVector,
+  TapGestureEvent,
+  Vector,
+} from '../types';
 import { clamp } from '../utils/clamp';
 import { pinchTransform } from '../utils/pinchTransform';
 
@@ -38,7 +43,8 @@ export const useDoubleTapCommons = ({
 
     const originX = event.x - container.width.value / 2;
     const originY = event.y - container.height.value / 2;
-    const toScale = scale.value >= maxScale.value * 0.8 ? minScale : maxScale.value;
+    const toScale =
+      scale.value >= maxScale.value * 0.8 ? minScale : maxScale.value;
 
     const { x, y } = pinchTransform({
       toScale,

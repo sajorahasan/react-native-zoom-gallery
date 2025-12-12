@@ -23,11 +23,13 @@ export type GalleryTransitionState = {
   gallerySize: SizeVector<number>;
 };
 
-export type GalleryTransitionCallback = (options: GalleryTransitionState) => ViewStyle;
+export type GalleryTransitionCallback = (
+  options: GalleryTransitionState
+) => ViewStyle;
 
 export type GalleryProps<T = unknown> = {
   data: T[];
-  renderItem: (item: T, index: number) => React.ReactElement;
+  renderItem: (item: T, index: number) => React.ReactNode;
 } & Partial<{
   keyExtractor: (item: T, index: number) => string;
   maxScale: number | SizeVector<number>[];

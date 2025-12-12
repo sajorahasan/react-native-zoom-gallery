@@ -1,6 +1,6 @@
 /* eslint-disable simple-import-sort/imports */
 import React, { useContext, useImperativeHandle, useState } from 'react';
-import { type LayoutChangeEvent } from 'react-native';
+
 import Animated, {
   runOnJS,
   useAnimatedReaction,
@@ -57,8 +57,16 @@ const Gallery = <T,>(props: GalleryPropsWithRef<T>) => {
     onGestureEnd,
   } = props;
 
-  const { activeIndex, rootSize, rootChildSize, scroll, translate, scale, hasZoomed, overflow } =
-    useContext(GalleryContext);
+  const {
+    activeIndex,
+    rootSize,
+    rootChildSize,
+    scroll,
+    translate,
+    scale,
+    hasZoomed,
+    overflow,
+  } = useContext(GalleryContext);
 
   const nextItems = Math.floor(windowSize / 2);
   const [scrollIndex, setScrollIndex] = useState<number>(initialIndex);
@@ -83,8 +91,8 @@ const Gallery = <T,>(props: GalleryPropsWithRef<T>) => {
     return userMaxScale;
   }, [userMaxScale, activeIndex, rootChildSize]);
 
-  const measureRoot = (e: LayoutChangeEvent) => {
-    const { width, height } = e.nativeEvent.layout;
+  const measureRoot = (event: any) => {
+    const { width, height } = event.nativeEvent.layout;
     const scrollPosition = getScrollPosition({
       index: activeIndex.get(),
       itemSize: vertical ? height : width,

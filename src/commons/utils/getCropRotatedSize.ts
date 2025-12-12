@@ -47,10 +47,13 @@ export const getCropRotatedSize = (options: Options): SizeVector<number> => {
   base.width = base.width * sizeModifier;
   base.height = base.height * sizeModifier;
 
-  const maxWidth = Math.abs(base.height * Math.sin(angle)) + Math.abs(base.width * Math.cos(angle));
+  const maxWidth =
+    Math.abs(base.height * Math.sin(angle)) +
+    Math.abs(base.width * Math.cos(angle));
 
   const maxHeight =
-    Math.abs(base.height * Math.cos(angle)) + Math.abs(base.width * Math.sin(angle));
+    Math.abs(base.height * Math.cos(angle)) +
+    Math.abs(base.width * Math.sin(angle));
 
   return getRatioSize(aspectRatio, {
     width: aspectRatio >= 1 ? undefined : maxWidth,
